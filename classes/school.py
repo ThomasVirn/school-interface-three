@@ -21,12 +21,25 @@ class School:
     def add_student(self, student_data):
         student_var = Student(**student_data)
         self.students.append(student_var) 
+        self.save_student()
+
+    def save_student(self):
         headers = ["name", "age", "password", "role", "school_id"]
         with open('data/students.csv', mode ='w') as x:
             new_csv = csv.DictWriter(x, headers)
             new_csv.writeheader()
             for i in self.students:
                 new_csv.writerow(i.__dict__)
+
+    def delete_student(self, student_id):
+        for s in self.students:
+            if student_id == s.school_id:
+                self.students.remove(s)
+                break
+        self.save_student()
+        print('Student has been removed.')
+        
+
 
                 
 
