@@ -6,6 +6,7 @@ class School:
         self.name = name
         self.staff = Staff.objects()
         self.students = Student.objects()
+        
 
     def list_students(self):
         print('\n')
@@ -16,3 +17,8 @@ class School:
         for student in self.students:
             if student.school_id == student_id:
                 return student
+
+    def add_student(self, student_data):
+        # create new instance of a student object
+        student_var = Student(**student_data)
+        return self.students.append(student_var)
