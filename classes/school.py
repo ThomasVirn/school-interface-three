@@ -1,6 +1,6 @@
 from classes.staff import Staff
 from classes.student import Student
-
+import csv, os.path
 class School:
     def __init__(self, name):
         self.name = name
@@ -19,6 +19,17 @@ class School:
                 return student
 
     def add_student(self, student_data):
-        # create new instance of a student object
         student_var = Student(**student_data)
-        return self.students.append(student_var)
+        self.students.append(student_var) 
+        headers = ["name", "age", "password", "role", "school_id"]
+        with open('data/students.csv', mode ='w') as x:
+            new_csv = csv.DictWriter(x, headers)
+            new_csv.writeheader()
+            for i in self.students:
+                new_csv.writerow(i.__dict__)
+
+                
+
+
+    
+
